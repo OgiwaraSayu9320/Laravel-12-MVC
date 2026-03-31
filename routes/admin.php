@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SeoPageController;
+use App\Http\Controllers\Admin\ContactController;
 
 
 // 1. Nhóm route dành cho KHÁCH (chưa đăng nhập)
@@ -58,5 +59,6 @@ Route::middleware('auth:admin')->group(function () {
     Route::put('profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
 
     Route::resource('seo-pages', SeoPageController::class);
+    Route::resource('contacts', ContactController::class)->only(['index', 'show', 'destroy']);
 
 });

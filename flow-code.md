@@ -13,7 +13,7 @@ Tác giả: Antigravity AI + Nguyễn Trí
 3. Sprint 1 — Hoàn thành (Nền tảng Admin)
 4. Sprint 2 — Hoàn thành (Hoàn thiện Admin)
 5. Sprint 3 — Hoàn thành (Frontend Website)
-6. Sprint 4 — Cần làm tiếp (Contact Form)
+6. Sprint 4 — Hoàn thành (Contact Form & Management)
 7. Quy ước code chuẩn của dự án
 8. Kiến trúc Service Layer
 
@@ -389,16 +389,41 @@ $slug = $slug ?: 'product-' . $product->id;
 
 ---
 
-## PHẦN 6: SPRINT 4 — CẦN LÀM TIẾP
+## PHẦN 6: SPRINT 4 — HOÀN THÀNH
 
 ### 6.1 Contact Form — Lưu Database + Gửi Email
 
 **Yêu cầu:** Form liên hệ trang `/lien-he` phải đồng thời:
+1. Lưu thông tin vào database bảng `contacts`.
+2. Gửi email thông báo cho admin.
 
-1. Lưu thông tin vào database bảng `contacts`
-2. Gửi email thông báo cho admin
+**Các bước thực hiện:**
+- [x] Tạo Migration `create_contacts_table` và Model `Contact`.
+- [x] Chạy migrate: `php artisan migrate`.
+- [x] Tạo `ContactService` để xử lý logic lưu trữ và gửi mail.
+- [x] Tạo `ContactMail` (Mailable) và view email `resources/views/emails/contact.blade.php`.
+- [x] Cập nhật `Frontend\ContactController@store` để nhận dữ liệu từ form.
+- [x] Thêm Route POST trong `web.php` và cập nhật `<form>` trong `pages/contact/index.blade.php`.
 
-**Tại sao cần cột `type`:** Sau này website có thể có nhiều loại liên hệ khác nhau (tư vấn, hợp tác, khiếu nại...). Dùng cột `type` để phân biệt mà không cần tạo nhiều bảng.
+### 6.2 Admin Management — Quản lý Liên hệ
+
+**Yêu cầu:** Admin có thể xem danh sách, chi tiết và xóa liên hệ.
+
+**Các bước thực hiện:**
+- [x] Tạo `Admin\ContactController` (index, show, destroy).
+- [x] Tạo Views: `admin/contacts/index.blade.php` và `admin/contacts/show.blade.php`.
+- [x] Đăng ký Route resource trong `admin.php`.
+- [x] Thêm menu "Quản lý Liên hệ" vào `sidebar.blade.php`.
+
+### 6.3 Sửa lỗi FE Assets (Vite) [ĐÃ XÁC NHẬN]
+
+- [x] Đã chuyển sang dùng `@vite(['resources/css/app.css', 'resources/js/app.js'])`.
+- [x] Xác nhận code CSS/JS từ nay sẽ sửa trong `resources/` thay vì `public/`.
+
+
+---
+
+## PHẦN 7: QUY ƯỚC CODE CHUẨN
 
 #### Migration: contacts
 

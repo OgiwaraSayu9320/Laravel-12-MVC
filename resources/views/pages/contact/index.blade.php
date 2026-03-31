@@ -64,22 +64,36 @@
             <!-- Contact Form -->
             <div style="background: white; border: 1px solid var(--border-color); border-radius: 1.5rem; padding: 40px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);">
                 <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 30px;">{{ $lang == 'vi' ? 'Gửi tin nhắn' : 'Send us a message' }}</h3>
-                <form>
+                
+                @if(session('success'))
+                    <div style="padding: 15px; background: #ecfdf5; color: #065f46; border-radius: 0.5rem; margin-bottom: 20px; font-weight: 600;">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <form action="{{ route('contact.store', ['lang' => $lang]) }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="type" value="lien-he">
+                    
                     <div style="margin-bottom: 20px;">
                         <label style="display: block; font-weight: 600; margin-bottom: 8px;">{{ $lang == 'vi' ? 'Họ và tên' : 'Full Name' }} *</label>
-                        <input type="text" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 0.5rem;" required>
+                        <input type="text" name="ho_ten" value="{{ old('ho_ten') }}" style="width: 100%; padding: 12px; border: 1px solid {{ $errors->has('ho_ten') ? '#ef4444' : 'var(--border-color)' }}; border-radius: 0.5rem;" required>
+                        @error('ho_ten') <span style="color: #ef4444; font-size: 0.875rem;">{{ $message }}</span> @enderror
                     </div>
                     <div style="margin-bottom: 20px;">
                         <label style="display: block; font-weight: 600; margin-bottom: 8px;">Email *</label>
-                        <input type="email" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 0.5rem;" required>
+                        <input type="email" name="email" value="{{ old('email') }}" style="width: 100%; padding: 12px; border: 1px solid {{ $errors->has('email') ? '#ef4444' : 'var(--border-color)' }}; border-radius: 0.5rem;" required>
+                        @error('email') <span style="color: #ef4444; font-size: 0.875rem;">{{ $message }}</span> @enderror
                     </div>
                     <div style="margin-bottom: 20px;">
                         <label style="display: block; font-weight: 600; margin-bottom: 8px;">{{ $lang == 'vi' ? 'Số điện thoại' : 'Phone Number' }}</label>
-                        <input type="text" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 0.5rem;">
+                        <input type="text" name="phone" value="{{ old('phone') }}" style="width: 100%; padding: 12px; border: 1px solid {{ $errors->has('phone') ? '#ef4444' : 'var(--border-color)' }}; border-radius: 0.5rem;">
+                        @error('phone') <span style="color: #ef4444; font-size: 0.875rem;">{{ $message }}</span> @enderror
                     </div>
                     <div style="margin-bottom: 30px;">
                         <label style="display: block; font-weight: 600; margin-bottom: 8px;">{{ $lang == 'vi' ? 'Nội dung' : 'Message' }} *</label>
-                        <textarea style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 0.5rem; height: 120px;" required></textarea>
+                        <textarea name="noi_dung" style="width: 100%; padding: 12px; border: 1px solid {{ $errors->has('noi_dung') ? '#ef4444' : 'var(--border-color)' }}; border-radius: 0.5rem; height: 120px;" required>{{ old('noi_dung') }}</textarea>
+                        @error('noi_dung') <span style="color: #ef4444; font-size: 0.875rem;">{{ $message }}</span> @enderror
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem; font-size: 1rem;">
                         {{ $lang == 'vi' ? 'Gửi ngay' : 'Send Message' }}

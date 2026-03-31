@@ -82,6 +82,14 @@
 
                 </ul>
             </li>
+            
+            {{-- Contacts --}}
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('admin.contacts.*') ? 'active' : '' }}" href="{{ route('admin.contacts.index') }}">
+                    <i class="bi bi-chat-left-dots"></i>
+                    Quản lý Liên hệ
+                </a>
+            </li>
 
             {{-- News --}}
             <li class="nav-item has-treeview {{ $isNewsActive ? 'menu-open' : '' }}">

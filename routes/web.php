@@ -38,6 +38,7 @@ Route::middleware(['setlocale'])->group(function () {
 
         // Liên hệ
         Route::get('/lien-he', [ContactController::class, 'index'])->name('contact');
+        Route::post('/lien-he', [ContactController::class, 'store'])->name('contact.store');
 
     });
 });
