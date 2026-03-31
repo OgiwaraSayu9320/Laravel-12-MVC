@@ -1,0 +1,118 @@
+@extends('admin.layouts.app')
+
+@section('title', 'Danh mục tin tức cấp 2')
+
+@section('content')
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3 mb-0">Danh mục tin tức cấp 2</h1>
+            <a href="{{ route('admin.news-cats.create') }}" class="btn btn-primary">
+                <i class="bi bi-plus-lg me-1"></i> Thêm mới
+            </a>
+        </div>
+
+        <form method="GET" action="{{ route('admin.news-cats.index') }}" class="card shadow-sm mb-4">
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-search"></i></span>
+                            <input type="text" name="search" class="form-control" placeholder="Tìm tên danh mục..." value="{{ request('search') }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <select name="id_list" class="form-select text-truncate">
+                            <option value="">-- Tất cả cấp 1 --</option>
+                            @foreach($lists as $list)
+                                <option value="{{ $list->id }}" {{ request('id_list') == $list->id ? 'selected' : '' }}>{{ $list->tenvi }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select name="hienthi" class="form-select">
+                            <option value="">-- Trạng thái --</option>
+                            <option value="1" {{ request('hienthi') == '1' ? 'selected' : '' }}>Hiển thị</option>
+                            <option value="0" {{ request('hienthi') == '0' ? 'selected' : '' }}>Ẩn</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 d-flex gap-2">
+                        <button type="submit" class="btn btn-primary w-100">Lọc</button>
+                        <a href="{{ route('admin.news-cats.index') }}" class="btn btn-outline-secondary w-100">Reset</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="card shadow-sm">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped mb-0 align-middle">
+                        <thead class="bg-light">
+                            <tr>
+                                <th width="5%">STT</th>
+                                <th width="10%">Hình</th>
+                                <th width="30%">Tiêu đề</th>
+                                <th width="20%">Cấp 1</th>
+                                <th width="10%">Trạng thái</th>
+                                <th width="10%">Nổi bật</th>
+                                <th width="15%" class="text-end">Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($cats as $item)
+                                <tr>
+                                    <td>
+                                        <input type="number" class="form-control form-control-sm" value="{{ $item->stt }}" 
+                                               style="width: 60px" readonly>
+                                    </td>
+                                    <td>
+                                        @if ($item->photo && Storage::disk('public')->exists($item->photo))
+                                            <img src="{{ asset('storage/' . $item->photo) }}" width="50" height="50" class="rounded object-fit-cover">
+                                        @else
+                                            <img src="https://placehold.co/50x50?text=No+Img" class="rounded">
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <div class="fw-bold"><a href="{{ route('admin.news-cats.edit', $item->id) }}">{{ $item->tenvi }}</a></div>
+                                        @if($item->tenen) <small class="text-muted">EN: {{ $item->tenen }}</small> @endif
+                                    </td>
+                                    <td>
+                                        <span class="text-primary small fw-bold">{{ $item->list->tenvi ?? '---' }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="badge {{ $item->hienthi ? 'bg-success' : 'bg-secondary' }}">
+                                            {{ $item->hienthi ? 'Hiển thị' : 'Ẩn' }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge {{ $item->noibat ? 'bg-danger' : 'bg-light text-dark' }}">
+                                            {{ $item->noibat ? 'Nổi bật' : 'Thường' }}
+                                        </span>
+                                    </td>
+                                    <td class="text-end">
+                                        <a href="{{ route('admin.news-cats.edit', $item->id) }}" class="btn btn-sm btn-warning">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                        <form action="{{ route('admin.news-cats.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?');">
+                                            @csrf @method('DELETE')
+                                            <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="text-center py-4 text-muted">Không tìm thấy dữ liệu.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @if($cats->hasPages())
+                <div class="card-footer d-flex justify-content-end py-3">
+                    {{ $cats->appends(request()->query())->links('pagination::bootstrap-5') }}
+                </div>
+            @endif
+        </div>
+    </div>
+@endsection

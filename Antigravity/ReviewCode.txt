@@ -1,0 +1,9 @@
+Hãy quét toàn bộ source code của dự án Laravel này. Phân tích kỹ cấu trúc MVC hiện tại (đặc biệt là Routes, Controllers, Models, Service, và Views). Sau đó, lập một luồng công việc (flow code) chi tiết từng bước cho các tính năng sắp tới. Lưu toàn bộ kế hoạch vào file flow-code.md tại thư mục gốc. Tuyệt đối dừng lại, không tự ý viết code hay chạy lệnh Terminal nào cho đến khi tôi đọc và duyệt file này.
+
+Tôi đã đọc file flow-code.md và đồng ý với kế hoạch.
+Dưới đây là câu trả lời cho bạn:
+
+File config/lang.php [CÓ/KHÔNG] tồn tại.
+
+Module News [CÓ/KHÔNG] cần danh mục riêng.
+[Điền thêm câu trả lời cho 3 câu hỏi còn lại...]
