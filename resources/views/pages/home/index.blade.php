@@ -36,16 +36,12 @@
             <div class="product-grid">
                 @forelse($featuredProducts as $product)
                     <div class="product-card">
-                        @php
-                            $slug = $lang == 'vi' ? $product->tenkhongdauvi : $product->tenkhongdauen;
-                            $slug = $slug ?: 'product-' . $product->id;
-                        @endphp
-                        <a href="{{ route('products.show', ['lang' => $lang, 'slug' => $slug]) }}">
-                            <img src="{{ $product->photo ? asset('storage/' . $product->photo) : asset('admin_assets/images/noimage.png') }}" class="product-img" alt="{{ $lang == 'vi' ? $product->tenvi : $product->tenen }}">
+                        <a href="{{ route('products.show', ['lang' => $lang, 'slug' => $product->slug]) }}">
+                            <img src="{{ $product->photo ? asset('storage/' . $product->photo) : asset('admin_assets/images/noimage.png') }}" class="product-img" alt="{{ $product->name }}">
                         </a>
                         <div class="product-info">
-                            <a href="{{ route('products.show', ['lang' => $lang, 'slug' => $slug]) }}" class="product-name">
-                                {{ $lang == 'vi' ? $product->tenvi : $product->tenen }}
+                            <a href="{{ route('products.show', ['lang' => $lang, 'slug' => $product->slug]) }}" class="product-name">
+                                {{ $product->name }}
                             </a>
                             <div class="product-price">
                                 @if($product->giamoi > 0)
@@ -55,7 +51,7 @@
                                     {{ $product->gia > 0 ? number_format($product->gia) . ' đ' : ($lang == 'vi' ? 'Liên hệ' : 'Contact Us') }}
                                 @endif
                             </div>
-                            <a href="{{ route('products.show', ['lang' => $lang, 'slug' => $lang == 'vi' ? $product->tenkhongdauvi : $product->tenkhongdauen]) }}" class="btn btn-primary" style="width: 100%; text-align: center;">
+                            <a href="{{ route('products.show', ['lang' => $lang, 'slug' => $product->slug]) }}" class="btn btn-primary" style="width: 100%; text-align: center;">
                                 {{ $lang == 'vi' ? 'Xem chi tiết' : 'View Detail' }}
                             </a>
                         </div>
@@ -74,21 +70,17 @@
             <div class="news-grid">
                 @forelse($latestNews as $item)
                     <div class="news-card">
-                        @php
-                            $slug = $lang == 'vi' ? $item->tenkhongdauvi : $item->tenkhongdauen;
-                            $slug = $slug ?: 'news-' . $item->id;
-                        @endphp
-                        <a href="{{ route('news.show', ['lang' => $lang, 'slug' => $slug]) }}">
-                            <img src="{{ $item->photo ? asset('storage/' . $item->photo) : asset('admin_assets/images/noimage.png') }}" class="news-img" alt="{{ $lang == 'vi' ? $item->tenvi : $item->tenen }}">
+                        <a href="{{ route('news.show', ['lang' => $lang, 'slug' => $item->slug]) }}">
+                            <img src="{{ $item->photo ? asset('storage/' . $item->photo) : asset('admin_assets/images/noimage.png') }}" class="news-img" alt="{{ $item->name }}">
                         </a>
                         <div class="news-info">
-                            <a href="{{ route('news.show', ['lang' => $lang, 'slug' => $slug]) }}" class="news-title">
-                                {{ $lang == 'vi' ? $item->tenvi : $item->tenen }}
+                            <a href="{{ route('news.show', ['lang' => $lang, 'slug' => $item->slug]) }}" class="news-title">
+                                {{ $item->name }}
                             </a>
                             <p class="news-desc">
-                                {{ $lang == 'vi' ? $item->motavi : $item->motaen }}
+                                {{ $item->desc }}
                             </p>
-                            <a href="{{ route('news.show', ['lang' => $lang, 'slug' => $slug]) }}" style="color: var(--primary-color); font-weight: 600; text-decoration: none;">
+                            <a href="{{ route('news.show', ['lang' => $lang, 'slug' => $item->slug]) }}" style="color: var(--primary-color); font-weight: 600; text-decoration: none;">
                                 {{ $lang == 'vi' ? 'Đọc thêm' : 'Read more' }} →
                             </a>
                         </div>

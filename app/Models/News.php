@@ -39,6 +39,14 @@ class News extends Model
         return $this->{"mota$lang"} ?? $this->motavi;
     }
 
+    // Helper lấy slug (đường dẫn không dấu) có fallback
+    public function getSlugAttribute()
+    {
+        $lang = app()->getLocale();
+        $slug = $this->{"tenkhongdau$lang"};
+        return !empty($slug) ? $slug : 'news-' . $this->id;
+    }
+
     // Relationship: Thuộc danh mục cấp 1
     public function list()
     {

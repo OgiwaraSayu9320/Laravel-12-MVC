@@ -13,7 +13,7 @@ Tác giả: Antigravity AI + Nguyễn Trí
 3. Sprint 1 — Hoàn thành (Nền tảng Admin)
 4. Sprint 2 — Hoàn thành (Hoàn thiện Admin)
 5. Sprint 3 — Hoàn thành (Frontend Website)
-6. Sprint 4 — Hoàn thành (Contact Form & Management)
+6. Sprint 4 — XONG (Contact Form & Management)
 7. Quy ước code chuẩn của dự án
 8. Kiến trúc Service Layer
 
@@ -619,18 +619,18 @@ app/
 │   │   │   ├── SeoPageController.php           [XONG]
 │   │   │   ├── ProfileController.php           [XONG]
 │   │   │   ├── UploadController.php            [XONG]
-│   │   │   └── ContactController.php           [CẦN TẠO — Sprint 4]
+│   │   │   └── ContactController.php           [XONG]
 │   │   ├── Frontend/
 │   │   │   ├── HomeController.php              [XONG]
 │   │   │   ├── ProductController.php           [XONG]
 │   │   │   ├── NewsController.php              [XONG]
-│   │   │   └── ContactController.php           [CẦN CẬP NHẬT — Sprint 4]
+│   │   │   └── ContactController.php           [XONG]
 │   │   └── Controller.php
 │   └── Middleware/
 │       ├── AdminRoleMiddleware.php              [XONG]
 │       └── SetLocale.php                       [XONG]
 ├── Mail/
-│   └── ContactMail.php                         [CẦN TẠO — Sprint 4]
+│   └── ContactMail.php                         [XONG]
 ├── Models/
 │   ├── Admin.php                               [XONG]
 │   ├── Brand.php                               [XONG]
@@ -642,13 +642,13 @@ app/
 │   ├── ProductCat.php                          [XONG]
 │   ├── ProductList.php                         [XONG]
 │   ├── SeoPage.php                             [XONG]
-│   ├── Contact.php                             [CẦN TẠO — Sprint 4]
+│   ├── Contact.php                             [XONG]
 │   └── User.php                               (chưa dùng)
 ├── Services/
 │   ├── HomeService.php                         [XONG]
 │   ├── ProductService.php                      [XONG]
 │   ├── NewsService.php                         [XONG]
-│   └── ContactService.php                      [CẦN TẠO — Sprint 4]
+│   └── ContactService.php                      [XONG]
 └── Traits/
     ├── HasMultilingual.php                     [XONG]
     └── HasImageUpload.php                      [XONG]
@@ -667,7 +667,7 @@ resources/views/
 │   ├── product_lists/{index,create,edit}.blade.php[XONG]
 │   ├── profile/index.blade.php                 [XONG]
 │   ├── seo_pages/{index,edit}.blade.php        [XONG]
-│   └── contacts/{index,show}.blade.php         [CẦN TẠO — Sprint 4]
+│   └── contacts/{index,show}.blade.php         [XONG]
 ├── layouts/
 │   ├── main.blade.php                          [XONG]
 │   ├── header.blade.php                        [XONG]
@@ -676,20 +676,20 @@ resources/views/
 │   ├── home/index.blade.php                    [XONG]
 │   ├── products/{index,show}.blade.php         [XONG]
 │   ├── news/{index,show}.blade.php             [XONG]
-│   └── contact/index.blade.php                 [XONG — cần cập nhật form action]
+│   └── contact/index.blade.php                 [XONG]
 └── emails/
-    └── contact.blade.php                       [CẦN TẠO — Sprint 4]
+    └── contact.blade.php                       [XONG]
 
 routes/
-├── web.php                                     [XONG — cần thêm POST lien-he]
-└── admin.php                                   [XONG — cần thêm contacts resource]
+├── web.php                                     [XONG]
+└── admin.php                                   [XONG]
 
 database/
 ├── migrations/
 │   ├── admins, products, product_lists, product_cats  [XONG]
 │   ├── news, news_lists, news_cats             [XONG]
 │   ├── brands, galleries, seo_pages            [XONG]
-│   └── contacts                                [CẦN TẠO — Sprint 4]
+│   └── contacts                                [XONG]
 └── seeders/
     ├── AdminSeeder.php                          [XONG] email: nguyentri9320@gmail.com / 123qwe
     ├── SeoPageSeeder.php                       [XONG]
@@ -884,7 +884,7 @@ class ProductController extends Controller
 | Sprint 1 | Nền tảng Admin (Auth, Products, SEO, Traits)              | XONG       |
 | Sprint 2 | Hoàn thiện Admin (News, Brands, Dashboard, Profile)       | XONG       |
 | Sprint 3 | Frontend Website đa ngôn ngữ + Service Layer              | XONG       |
-| Sprint 4 | Contact Form (lưu DB + gửi email) + Admin quản lý liên hệ | CẦN LÀM    |
+| Sprint 4 | Contact Form (lưu DB + gửi email) + Admin quản lý liên hệ | XONG       |
 
 Tài khoản Admin mặc định (từ AdminSeeder):
 

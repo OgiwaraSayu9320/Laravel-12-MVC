@@ -66,16 +66,12 @@
                 <div class="product-grid">
                     @forelse($products as $product)
                         <div class="product-card">
-                            @php
-                                $slug = $lang == 'vi' ? $product->tenkhongdauvi : $product->tenkhongdauen;
-                                $slug = $slug ?: 'product-' . $product->id;
-                            @endphp
-                            <a href="{{ route('products.show', ['lang' => $lang, 'slug' => $slug]) }}">
-                                <img src="{{ $product->photo ? asset('storage/' . $product->photo) : asset('admin_assets/images/noimage.png') }}" class="product-img" alt="{{ $lang == 'vi' ? $product->tenvi : $product->tenen }}">
+                            <a href="{{ route('products.show', ['lang' => $lang, 'slug' => $product->slug]) }}">
+                                <img src="{{ $product->photo ? asset('storage/' . $product->photo) : asset('admin_assets/images/noimage.png') }}" class="product-img" alt="{{ $product->name }}">
                             </a>
                             <div class="product-info">
-                                <a href="{{ route('products.show', ['lang' => $lang, 'slug' => $slug]) }}" class="product-name">
-                                    {{ $lang == 'vi' ? $product->tenvi : $product->tenen }}
+                                <a href="{{ route('products.show', ['lang' => $lang, 'slug' => $product->slug]) }}" class="product-name">
+                                    {{ $product->name }}
                                 </a>
                                 <div class="product-price">
                                     @if($product->giamoi > 0)
@@ -84,7 +80,7 @@
                                         {{ $product->gia > 0 ? number_format($product->gia) . ' đ' : ($lang == 'vi' ? 'Liên hệ' : 'Contact Us') }}
                                     @endif
                                 </div>
-                                <a href="{{ route('products.show', ['lang' => $lang, 'slug' => $lang == 'vi' ? $product->tenkhongdauvi : $product->tenkhongdauen]) }}" class="btn btn-primary" style="width: 100%; text-align: center; margin-top: auto;">
+                                <a href="{{ route('products.show', ['lang' => $lang, 'slug' => $product->slug]) }}" class="btn btn-primary" style="width: 100%; text-align: center; margin-top: auto;">
                                     {{ $lang == 'vi' ? 'Chi tiết' : 'Details' }}
                                 </a>
                             </div>
